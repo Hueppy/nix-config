@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+SOURCE=`dirname $BASH_SOURCE[0]`
+SOURCE=`realpath $SOURCE`
+
+TARGET=/etc
+
+if [[ ! -f $SOURCE/nixos/hardware-configuration.nix ]]
+then
+    echo "hardware-configuration.nix not found - backing up current configuration"
+    rsync -a $TARGET/nixos $SOURCE
+    echo "please review / reset / merge the configuration changes"
+    exit 1
+fi
+
+echo "all files under $TARGET/nixos will be overwritten"
+read -p "continue? " -n 1 -r
+echo 
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+    exit 1
+fi
+
+echo "copying configuration"
+sudo rsync -a --delete-after $SOURCE/nixos $TARGET
+echo
+
+echo "rebuilding nixos"
+sudo nixos-rebuild switch
+echo
