@@ -11,6 +11,7 @@
     phue = {
       home = {
         packages = with pkgs; [
+          jetbrains.clion
         ];
       };
     };

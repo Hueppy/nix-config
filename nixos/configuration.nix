@@ -18,7 +18,7 @@
   };
 
   networking = {
-    hostname = ""; # Define your hostname
+    hostname = "betazed"; # Define your hostname
     networkmanager.enable = true;
   };
 
@@ -47,8 +47,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    alacritty
-    librewolf
+      alacritty
+      btop
+      discord
+      emacs
+      librewolf-wayland
+      steam
   ];
 
   nixpkgs.config.allowUnfree = true;
