@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./user.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -42,13 +43,6 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.phue = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-    ];
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
